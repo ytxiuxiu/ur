@@ -26,15 +26,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwidget.cpp \
     robotsimwidget.cpp \
+    robotthread.cpp \
     robotserver.cpp \
-    robotthread.cpp
+    rawmodel.cpp \
+    loader.cpp \
+    renderer.cpp \
+    shaderprogram.cpp \
+    staticshader.cpp
 
 HEADERS  += mainwidget.h \
     robotsimwidget.h \
     robotserver.h \
-    robotthread.h
+    robotthread.h \
+    tinyobjloader.h \
+    rawmodel.h \
+    loader.h \
+    renderer.h \
+    shaderprogram.h \
+    staticshader.h
 
 FORMS    += mainwidget.ui
 
 RESOURCES += \
     ur3.qrc
+
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/include
+
+

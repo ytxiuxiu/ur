@@ -1,12 +1,10 @@
 #version 330 core
 
-// Ouput data
-out vec3 color;
+in vec3 colour;
 
-void main()
+out vec4 out_Color;
+
+void main(void)
 {
-
-        // Output color = red
-        color = vec3(1,0,0);
-
+    out_Color = vec4(colour, 1.0);
 }
