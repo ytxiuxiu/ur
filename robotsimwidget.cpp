@@ -29,12 +29,17 @@ void RobotSimWidget::initializeGL()
         -0.5f, 0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
+//        0.5f, -0.5f, 0.0f,
         0.5f, 0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f
+//        -0.5f, 0.5f, 0.0f
     };
 
-    model = loader->loadToVao(&vertices);
+    std::vector<GLuint> indices = {
+        0, 1, 3,
+        3, 1, 2
+    };
+
+    model = loader->loadToVao(&vertices, &indices);
 }
 
 void RobotSimWidget::resizeGL(int w, int h)

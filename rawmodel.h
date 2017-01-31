@@ -1,17 +1,20 @@
 #ifndef RAWMODEL_H
 #define RAWMODEL_H
 
+#include <vector>
+#include <QtWidgets>
+
 
 class RawModel
 {
 public:
-    RawModel(int vaoId, int vertexCount);
-    int getVaoId() { return vaoId; }
-    int getVertexCount() { return vertexCount; }
+    RawModel(GLuint vaoId, GLuint vertexCount);
+    GLuint getVaoId() { return vaoId; }
+    GLuint getVertexCount() { return vertexCount; }
 
 private:
-    int vaoId;
-    int vertexCount;
+    GLuint vaoId;
+    GLuint vertexCount;
 };
 
 #endif // RAWMODEL_H
