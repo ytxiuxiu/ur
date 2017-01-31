@@ -12,14 +12,14 @@ class Loader
 {
 public:
     Loader();
-    RawModel* loadToVao(std::vector<glm::vec3> *positions);
+    RawModel* loadToVao(std::vector<GLfloat> *vertices);
     void cleanUp();
 
 private:
     std::vector<GLuint> vaos;
     std::vector<GLuint> vbos;
     GLuint createVao();
-    void storeDataInAttributeList(int attributeNumber, std::vector<glm::vec3> *data);
+    void storeDataInAttributeList(int attributeNumber, std::vector<GLfloat> *data);
     void unbindVao();
 };
 
