@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+#include "camera.h"
+#include "maths.h"
 #include "shaderprogram.h"
 
 
@@ -14,10 +16,12 @@ public:
     void getUniformLocations();
     void loadTransformation(glm::mat4 transformation);
     void loadProjection(glm::mat4 projection);
+    void loadView(Camera *camera);
 
 private:
     GLint locationTransformation;
     GLint locationProjection;
+    GLint locationView;
 };
 
 #endif // STATICSHADER_H

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWidget</string>
+   <string>UR</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">

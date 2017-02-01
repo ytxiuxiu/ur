@@ -15,6 +15,7 @@ void StaticShader::getUniformLocations()
 {
     locationTransformation = getUniformLocation("transformation");
     locationProjection = getUniformLocation("projection");
+    locationView = getUniformLocation("view");
 }
 
 void StaticShader::loadTransformation(glm::mat4 transformation)
@@ -25,4 +26,9 @@ void StaticShader::loadTransformation(glm::mat4 transformation)
 void StaticShader::loadProjection(glm::mat4 projection)
 {
     loadMatrix(locationProjection, projection);
+}
+
+void StaticShader::loadView(Camera *camera)
+{
+    loadMatrix(locationView, Maths::createView(camera));
 }

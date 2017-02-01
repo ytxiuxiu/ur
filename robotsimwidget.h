@@ -17,6 +17,7 @@ public:
     RobotSimWidget(QWidget* parent = 0);
     ~RobotSimWidget();
     Entity *getEntity() { return entity; }
+    Camera *getCamera() { return camera; }
 
 protected:
     void initializeGL();
@@ -36,6 +37,7 @@ private:
     Renderer *renderer;
     StaticShader *shader;
     Entity *entity;
+    Camera *camera;
 
 
 };

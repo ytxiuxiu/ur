@@ -11,3 +11,14 @@ mat4 Maths::createTransformation(vec3 translation, vec3 rotation, float scale)
 
     return trans * rot * sc;
 }
+
+mat4 Maths::createView(Camera *camera)
+{
+    mat4 rotX = rotate(mat4(1), radians(camera->getRotation().x), vec3(1, 0, 0));
+    mat4 rotY = rotate(mat4(1), radians(camera->getRotation().y), vec3(0, 1, 0));
+    mat4 rotZ = rotate(mat4(1), radians(camera->getRotation().z), vec3(0, 0, 1));
+    mat4 rot = rotX * rotY * rotZ;
+    mat4 trans = translate(mat4(1), vec3(-camera->getPosition().x, -camera->getPosition().y, -camera->getPosition().z));
+
+    return rot * trans;
+}
