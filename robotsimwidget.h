@@ -9,6 +9,9 @@
 #include "loader.h"
 #include "renderer.h"
 #include "staticshader.h"
+#include "file.h"
+#include "light.h"
+#include "objloader.h"
 
 
 class RobotSimWidget : public QOpenGLWidget
@@ -38,7 +41,8 @@ private:
     StaticShader *shader;
     Entity *entity;
     Camera *camera;
-
+    Light *light;
+    ObjLoader *objLoader;
 
 };
 

@@ -12,7 +12,7 @@ class Loader
 {
 public:
     Loader();
-    RawModel* loadToVao(std::vector<GLfloat> *vertices, std::vector<GLuint> *indices);
+    RawModel* loadToVao(std::vector<GLfloat> *vertices, std::vector<GLfloat> *normals, std::vector<GLuint> *indices);
     void cleanUp();
 
 private:
@@ -20,7 +20,7 @@ private:
     std::vector<GLuint> vbos;
     GLuint createVao();
     void bindIndicesBuffer(std::vector<GLuint> *indices);
-    void storeDataInAttributeList(int attributeNumber, std::vector<GLfloat> *data);
+    void storeDataInAttributeList(int attributeNumber, int sizePerVertex, std::vector<GLfloat> *data);
     void unbindVao();
 };
 

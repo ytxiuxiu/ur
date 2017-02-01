@@ -1,15 +1,20 @@
 #version 330 core
 
 in vec3 position;
+in vec3 normal;
 
-out vec3 colour;
+out vec3 surfaceNormal;
+out vec3 toLightVector;
 
 uniform mat4 transformation;
 uniform mat4 projection;
 uniform mat4 view;
+uniform vec3 lightPosition;
 
 void main(void)
 {
-    gl_Position = projection * view * transformation * vec4(position.xyz, 1.0);
-    colour = vec3(position.x + 0.5, 1.0, position.y + 0.5);
+    vec4 worldPosition = transformation * vec4(position, 1.0);
+    gl_Position = projection * view * worldPosition;
+    surfaceNormal = (transformation * vec4(normal, 0.0)).xyz;
+    toLightVector = lightPosition - worldPosition.xyz;
 }

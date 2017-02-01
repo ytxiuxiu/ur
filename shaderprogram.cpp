@@ -1,6 +1,6 @@
 #include "shaderprogram.h"
 
-ShaderProgram::ShaderProgram(QString vertexShaderFilename, QString fragmentShaderFilename) {
+ShaderProgram::ShaderProgram(std::string vertexShaderFilename, std::string fragmentShaderFilename) {
     this->vertexShaderFilename = vertexShaderFilename;
     this->fragmentShaderFilename = fragmentShaderFilename;
 
@@ -37,11 +37,11 @@ void ShaderProgram::compile()
 }
 
 
-GLuint ShaderProgram::loadShader(QString filename, GLenum type)
+GLuint ShaderProgram::loadShader(std::string filename, GLenum type)
 {
     GLuint shaderId = glCreateShader(type);
 
-    std::string code = readFile(filename).toUtf8().constData();
+    std::string code = File::readFile(filename.c_str());
     GLchar const* files[] = { code.c_str() };
     GLint lengths[] = { (GLint) code.size() };
 
@@ -115,15 +115,4 @@ void ShaderProgram::cleanUp()
     glDeleteShader(fragmentShaderId);
 
     glDeleteProgram(programId);
-}
-
-QString ShaderProgram::readFile(QString filename)
-{
-    QFile file(filename);
-    if (!file.open(QFile::ReadOnly | QFile::Text))
-    {
-        return NULL;
-    }
-    QTextStream in(&file);
-    return in.readAll();
 }

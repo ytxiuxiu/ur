@@ -35,7 +35,10 @@ SOURCES += main.cpp\
     staticshader.cpp \
     maths.cpp \
     entity.cpp \
-    camera.cpp
+    camera.cpp \
+    file.cpp \
+    light.cpp \
+    objloader.cpp
 
 HEADERS  += mainwidget.h \
     robotsimwidget.h \
@@ -49,7 +52,10 @@ HEADERS  += mainwidget.h \
     staticshader.h \
     maths.h \
     entity.h \
-    camera.h
+    camera.h \
+    file.h \
+    light.h \
+    objloader.h
 
 FORMS    += mainwidget.ui
 

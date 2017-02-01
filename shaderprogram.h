@@ -5,11 +5,13 @@
 #include <QtWidgets>
 #include <glm/glm.hpp>
 
+#include "file.h"
+
 
 class ShaderProgram
 {
 public:
-    ShaderProgram(QString vertexShaderFilename, QString fragmentShaderFilename);
+    ShaderProgram(std::string vertexShaderFilename, std::string fragmentShaderFilename);
     void compile();
     void start();
     void stop();
@@ -27,13 +29,12 @@ protected:
 
 private:
     GLuint programId;
-    QString vertexShaderFilename;
+    std::string vertexShaderFilename;
     GLuint vertexShaderId;
-    QString fragmentShaderFilename;
+    std::string fragmentShaderFilename;
     GLuint fragmentShaderId;
 
-    GLuint loadShader(QString filename, GLenum type);
-    QString readFile(QString filename);
+    GLuint loadShader(std::string filename, GLenum type);
 };
 
 #endif // SHADERPROGRAM_H

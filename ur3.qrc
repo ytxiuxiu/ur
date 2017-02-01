@@ -11,5 +11,8 @@
         <file>5.obj</file>
         <file>6.obj</file>
         <file>base.obj</file>
+        <file>test.obj</file>
+        <file>untitled.obj</file>
+        <file>b.obj</file>
     </qresource>
 </RCC>
