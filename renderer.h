@@ -2,8 +2,11 @@
 #define RENDERER_H
 
 #include <QtWidgets>
+#include <glm/glm.hpp>
 
-#include "rawmodel.h"
+#include "staticshader.h"
+#include "entity.h"
+#include "maths.h"
 
 
 class Renderer
@@ -11,7 +14,7 @@ class Renderer
 public:
     Renderer();
     void prepare();
-    void render(RawModel* model);
+    void render(Entity* entity, StaticShader *shader);
 };
 
 #endif // RENDERER_H

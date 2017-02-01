@@ -8,5 +8,15 @@ StaticShader::StaticShader() :
 
 void StaticShader::bindAttributes()
 {
+    bindAttribute(0, "position");
+}
 
+void StaticShader::getUniformLocations()
+{
+    locationTransformation = getUniformLocation("transformation");
+}
+
+void StaticShader::loadTransformation(glm::mat4 transformation)
+{
+    loadMatrix(locationTransformation, transformation);
 }

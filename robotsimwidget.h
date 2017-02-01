@@ -16,6 +16,7 @@ class RobotSimWidget : public QOpenGLWidget
 public:
     RobotSimWidget(QWidget* parent = 0);
     ~RobotSimWidget();
+    Entity *getEntity() { return entity; }
 
 protected:
     void initializeGL();
@@ -30,10 +31,11 @@ private:
 //    void loadObj(QString filename, std::vector<glm::vec3>* vertices, std::vector<glm::vec2>* textures, std::vector<glm::vec3>* normals);
 //    std::vector<glm::vec3>* vertexBase;
 
-    Loader* loader;
-    RawModel* model;
-    Renderer* renderer;
-    StaticShader* shader;
+    Loader *loader;
+    RawModel *model;
+    Renderer *renderer;
+    StaticShader *shader;
+    Entity *entity;
 
 
 };

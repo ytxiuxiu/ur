@@ -3,7 +3,6 @@
 
 #include "mainwidget.h"
 #include "ui_mainwidget.h"
-#include "robotsimwidget.h"
 
 
 MainWidget::MainWidget(RobotServer *server, QWidget *parent) :
@@ -35,8 +34,13 @@ MainWidget::MainWidget(RobotServer *server, QWidget *parent) :
             server, SLOT(sendTarget(int,float,float,float,float,float,float)));
     connect(server, SIGNAL(statusChanged(int,int)), this, SLOT(changeStatus(int,int)));
 
-    RobotSimWidget *robotSimWidget = new RobotSimWidget;
+    robotSimWidget = new RobotSimWidget();
     ui->verticalLayout->addWidget(robotSimWidget);
+
+    paintTimer = new QTimer(this);
+    connect(paintTimer, SIGNAL(timeout()), this, SLOT(updateRobotSimWidget()));
+
+    paintTimer->start(30);
 }
 
 MainWidget::~MainWidget()
@@ -151,4 +155,12 @@ void MainWidget::changeStatus(int robot, int status)
             ui->targetWrist3->setDisabled(false);
         }
     }
+}
+
+void MainWidget::updateRobotSimWidget()
+{
+    Entity *entity = robotSimWidget->getEntity();
+    entity->increasePosition(0.01f, 0, 0);
+    entity->increaseRotation(100, 10, 0);
+    robotSimWidget->update();
 }

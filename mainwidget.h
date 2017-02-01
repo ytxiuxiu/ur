@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "robotserver.h"
+#include "robotsimwidget.h"
 
 
 namespace Ui {
@@ -31,9 +32,12 @@ public slots:
     void changeLabelTargetWrist3(int wrist3);
     void getTarget();
     void changeStatus(int robot, int status);
+    void updateRobotSimWidget();
 
 private:
     Ui::MainWidget *ui;
+    QTimer *paintTimer;
+    RobotSimWidget *robotSimWidget;
     QString float2DegStr(float value);
     bool inited;
 
