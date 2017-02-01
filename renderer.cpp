@@ -1,8 +1,11 @@
 #include "renderer.h"
 
-Renderer::Renderer()
+Renderer::Renderer(StaticShader *shader)
 {
-
+    projection = perspective(radians(FOV), SCENE_WIDTH / SCENE_HEIGHT, NEAR_PLANE, FAR_PLANE);
+    shader->start();
+    shader->loadProjection(projection);
+    shader->stop();
 }
 
 void Renderer::prepare()
@@ -16,7 +19,7 @@ void Renderer::render(Entity *entity, StaticShader *shader)
     RawModel *model = entity->getModel();
     glBindVertexArray(model->getVaoId());
     glEnableVertexAttribArray(0);
-    glm::mat4 transformation = Maths::createTransformation(entity->getPoistion(), entity->getRotation(), entity->getScale());
+    mat4 transformation = Maths::createTransformation(entity->getPoistion(), entity->getRotation(), entity->getScale());
     shader->loadTransformation(transformation);
     glDrawElements(GL_TRIANGLES, model->getVertexCount(), GL_UNSIGNED_INT, 0);
 //    glDrawArrays(GL_TRIANGLES, 0, model->getIndices()->size());

@@ -12,11 +12,7 @@ using namespace glm;
 class Maths
 {
 public:
-    Maths();
     static mat4 createTransformation(vec3 translation, vec3 rotation, float scale);
-
-private:
-    static float deg2Rad(float deg);
 };
 
 #endif // MATHS_H

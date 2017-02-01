@@ -3,18 +3,30 @@
 
 #include <QtWidgets>
 #include <glm/glm.hpp>
+#include <math.h>
 
 #include "staticshader.h"
 #include "entity.h"
 #include "maths.h"
 
+#define SCENE_WIDTH 549.0f
+#define SCENE_HEIGHT 291.0f
+#define FOV 70.0f
+#define NEAR_PLANE 0.1f
+#define FAR_PLANE 1000.0f
+
+using namespace glm;
+
 
 class Renderer
 {
 public:
-    Renderer();
+    Renderer(StaticShader *shader);
     void prepare();
     void render(Entity* entity, StaticShader *shader);
+
+private:
+    mat4 projection;
 };
 
 #endif // RENDERER_H

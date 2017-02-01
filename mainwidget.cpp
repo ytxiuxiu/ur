@@ -160,7 +160,7 @@ void MainWidget::changeStatus(int robot, int status)
 void MainWidget::updateRobotSimWidget()
 {
     Entity *entity = robotSimWidget->getEntity();
-    entity->increasePosition(0.01f, 0, 0);
-    entity->increaseRotation(100, 10, 0);
+    entity->increasePosition(0.01f, 0, -0.1f);
+    entity->increaseRotation(10, 10, 0);
     robotSimWidget->update();
 }

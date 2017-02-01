@@ -33,9 +33,9 @@ RobotSimWidget::~RobotSimWidget()
 void RobotSimWidget::initializeGL()
 {
     loader = new Loader();
-    renderer = new Renderer();
     shader = new StaticShader();
     shader->compile();
+    renderer = new Renderer(shader);
 
     std::vector<GLfloat> vertices = {
         -0.5f, 0.5f, 0.0f,
@@ -53,7 +53,7 @@ void RobotSimWidget::initializeGL()
 
     model = loader->loadToVao(&vertices, &indices);
 
-    glm::vec3 location(-1, 0, 0);
+    glm::vec3 location(-1, 0, -3);
     glm::vec3 rotation(0, 0, 0);
 
     entity = new Entity(model, location, rotation, 1);
