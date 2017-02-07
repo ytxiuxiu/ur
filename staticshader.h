@@ -19,6 +19,8 @@ public:
     void loadProjection(glm::mat4 projection);
     void loadView(Camera *camera);
     void loadLight(Light *light);
+    void loadColour(glm::vec3 colour);
+    void loadIsLight(bool isLight);
 
 private:
     GLint locationTransformation;
@@ -26,6 +28,8 @@ private:
     GLint locationView;
     GLint locationLightPosition;
     GLint locationLightColour;
+    GLint locationColour;
+    GLint locationIsLight;
 };
 
 #endif // STATICSHADER_H

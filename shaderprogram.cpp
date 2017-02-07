@@ -86,7 +86,7 @@ void ShaderProgram::loadVector(GLint location, glm::vec3 value)
 
 void ShaderProgram::loadBool(GLint location, bool value)
 {
-    glUniform1f(location, value ? 1 : 0);
+    glUniform1i(location, value ? 1 : 0);
 }
 
 void ShaderProgram::loadMatrix(GLint location, glm::mat4 value)

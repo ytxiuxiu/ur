@@ -4,14 +4,15 @@ Loader::Loader()
 {
 }
 
-RawModel* Loader::loadToVao(std::vector<GLfloat> *vertices, std::vector<GLfloat> *normals, std::vector<GLuint> *indices)
+RawModel* Loader::loadToVao(vector<GLfloat> *vertices, vector<GLfloat> *normals,
+                            vector<GLuint> *indices, vector<GLuint> shapeSizes)
 {
     GLuint vaoId = createVao();
     bindIndicesBuffer(indices);
     storeDataInAttributeList(0, 3, vertices);
     storeDataInAttributeList(1, 3, normals);
     unbindVao();
-    return new RawModel(vaoId, indices->size());
+    return new RawModel(vaoId, shapeSizes);
 }
 
 GLuint Loader::createVao()

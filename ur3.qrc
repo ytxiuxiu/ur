@@ -4,15 +4,15 @@
         <file>fragment.glsl</file>
     </qresource>
     <qresource prefix="/models">
-        <file>1.obj</file>
+        <file>robot-1.obj</file>
         <file>2.obj</file>
         <file>3.obj</file>
         <file>4.obj</file>
         <file>5.obj</file>
         <file>6.obj</file>
-        <file>base.obj</file>
-        <file>test.obj</file>
-        <file>untitled.obj</file>
         <file>b.obj</file>
+        <file>robot-base.obj</file>
+        <file>robot-2.obj</file>
+        <file>xyz.obj</file>
     </qresource>
 </RCC>

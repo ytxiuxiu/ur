@@ -1,7 +1,7 @@
 #ifndef ROBOTSIMWIDGET_H
 #define ROBOTSIMWIDGET_H
 
-#include <vector>
+#include <map>
 #include <QtWidgets>
 #include <glm/glm.hpp>
 
@@ -13,14 +13,18 @@
 #include "light.h"
 #include "objloader.h"
 
+#define FPS 30
+
 
 class RobotSimWidget : public QOpenGLWidget
 {
 public:
     RobotSimWidget(QWidget* parent = 0);
     ~RobotSimWidget();
-    Entity *getEntity() { return entity; }
+    std::map<std::string, Entity*> *getEntities() { return &entities; }
     Camera *getCamera() { return camera; }
+    int getRenderCount() { return renderCount; }
+    void setRenderCount(int renderCount) { this->renderCount = renderCount; }
 
 protected:
     void initializeGL();
@@ -39,10 +43,11 @@ private:
     RawModel *model;
     Renderer *renderer;
     StaticShader *shader;
-    Entity *entity;
+    std::map<std::string, Entity*> entities;
     Camera *camera;
     Light *light;
     ObjLoader *objLoader;
+    long renderCount;
 
 };
 

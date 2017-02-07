@@ -19,6 +19,8 @@ void StaticShader::getUniformLocations()
     locationView = getUniformLocation("view");
     locationLightPosition = getUniformLocation("lightPosition");
     locationLightColour = getUniformLocation("lightColour");
+    locationColour = getUniformLocation("colour");
+    locationIsLight = getUniformLocation("isLight");
 }
 
 void StaticShader::loadTransformation(glm::mat4 transformation)
@@ -40,4 +42,14 @@ void StaticShader::loadLight(Light *light)
 {
     loadVector(locationLightPosition, light->getPosition());
     loadVector(locationLightColour, light->getColour());
+}
+
+void StaticShader::loadColour(glm::vec3 colour)
+{
+    loadVector(locationColour, colour);
+}
+
+void StaticShader::loadIsLight(bool isLight)
+{
+    loadBool(locationIsLight, isLight);
 }

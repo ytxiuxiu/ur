@@ -2,9 +2,14 @@
 #define MAINWIDGET_H
 
 #include <QWidget>
+#include <math.h>
+#include <glm/glm.hpp>
 
 #include "robotserver.h"
 #include "robotsimwidget.h"
+#include "maths.h"
+
+using namespace glm;
 
 
 namespace Ui {
@@ -40,6 +45,10 @@ private:
     RobotSimWidget *robotSimWidget;
     QString float2DegStr(float value);
     bool inited;
+
+    mat4 t1;
+    mat4 t2;
+    mat4 t3;
 
 };
 

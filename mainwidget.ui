@@ -103,7 +103,7 @@
    </widget>
    <widget class="QSlider" name="targetBase">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -173,7 +173,7 @@
    </widget>
    <widget class="QSlider" name="targetShoulder">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -275,7 +275,7 @@
    </widget>
    <widget class="QSlider" name="targetElbow">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -371,7 +371,7 @@
    </widget>
    <widget class="QSlider" name="targetWrist1">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -480,7 +480,7 @@
    </widget>
    <widget class="QSlider" name="targetWrist2">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -537,7 +537,7 @@
    </widget>
    <widget class="QSlider" name="targetWrist3">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>

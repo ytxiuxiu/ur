@@ -16,5 +16,5 @@ void main(void)
     vec4 worldPosition = transformation * vec4(position, 1.0);
     gl_Position = projection * view * worldPosition;
     surfaceNormal = (transformation * vec4(normal, 0.0)).xyz;
-    toLightVector = lightPosition - worldPosition.xyz;
+    toLightVector = (vec4(lightPosition - worldPosition.xyz, 1.0) * view).xyz;
 }

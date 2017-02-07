@@ -38,7 +38,11 @@ SOURCES += main.cpp\
     camera.cpp \
     file.cpp \
     light.cpp \
-    objloader.cpp
+    objloader.cpp \
+    rawmodel.cpp \
+    entity.cpp \
+    light.cpp \
+    camera.cpp
 
 HEADERS  += mainwidget.h \
     robotsimwidget.h \

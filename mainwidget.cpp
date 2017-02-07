@@ -23,12 +23,12 @@ MainWidget::MainWidget(RobotServer *server, QWidget *parent) :
     connect(ui->targetWrist2, SIGNAL(valueChanged(int)), this, SLOT(changeLabelTargetWrist2(int)));
     connect(ui->targetWrist3, SIGNAL(valueChanged(int)), this, SLOT(changeLabelTargetWrist3(int)));
 
-    connect(ui->targetBase, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
-    connect(ui->targetShoulder, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
-    connect(ui->targetElbow, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
-    connect(ui->targetWrist1, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
-    connect(ui->targetWrist2, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
-    connect(ui->targetWrist3, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
+//    connect(ui->targetBase, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
+//    connect(ui->targetShoulder, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
+//    connect(ui->targetElbow, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
+//    connect(ui->targetWrist1, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
+//    connect(ui->targetWrist2, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
+//    connect(ui->targetWrist3, SIGNAL(sliderReleased()), this, SLOT(getTarget()));
 
     connect(this, SIGNAL(sendTarget(int,float,float,float,float,float,float)),
             server, SLOT(sendTarget(int,float,float,float,float,float,float)));
@@ -40,7 +40,7 @@ MainWidget::MainWidget(RobotServer *server, QWidget *parent) :
     paintTimer = new QTimer(this);
     connect(paintTimer, SIGNAL(timeout()), this, SLOT(updateRobotSimWidget()));
 
-    paintTimer->start(30);
+    paintTimer->start(1000.0f / FPS);
 }
 
 MainWidget::~MainWidget()
@@ -85,11 +85,35 @@ QString MainWidget::float2DegStr(float value)
 void MainWidget::changeLabelTargetBase(int base)
 {
     ui->labelTargetBase->setText(float2DegStr(base));
+    Entity *robot1 = robotSimWidget->getEntities()->at("robot-0-1");
+    robot1->setRotation(vec3(robot1->getRotation().x, base, robot1->getRotation().z));
+
+    t1 = Maths::createDhTransformation(152, base, 0, 90);
+    vec3 p1 = Maths::getPosition(t1);
+    vec3 r1 = Maths::getRotation(t1);
+
+    Entity *robot2 = robotSimWidget->getEntities()->at("robot-0-2");
+    robot2->setPosition(p1);
+    robot2->setRotation(r1);
+    Entity *xyz1 = robotSimWidget->getEntities()->at("robot-0-xyz-1");
+    xyz1->setPosition(p1);
+    xyz1->setRotation(r1);
+
 }
 
 void MainWidget::changeLabelTargetShoulder(int shoulder)
 {
     ui->labelTargetShoulder->setText(float2DegStr(shoulder));
+
+    vec3 r = inverse(Maths::getRotationMatric(t1)) * vec3(0, 0, shoulder);
+
+    Entity *robot2 = robotSimWidget->getEntities()->at("robot-0-2");
+    Entity *xyz1 = robotSimWidget->getEntities()->at("robot-0-xyz-1");
+
+    r = vec3(r[1], r[0], r[2]);
+    qDebug() << r[0] << r[1] << r[2];
+    robot2->setRotation(r);
+    xyz1->setRotation(r);
 }
 
 void MainWidget::changeLabelTargetElbow(int elbow)
@@ -159,13 +183,16 @@ void MainWidget::changeStatus(int robot, int status)
 
 void MainWidget::updateRobotSimWidget()
 {
-    Entity *entity = robotSimWidget->getEntity();
-    Camera *camera = robotSimWidget->getCamera();
+//    int position = robotSimWidget->getRenderCount() % (FPS * 10);
+//    float deg = 360.0f * position / (FPS * 10);
+//    float x = std::sin(glm::radians(deg)) * 250;
+//    float z = std::cos(glm::radians(deg)) * 250;
 
-    entity->increasePosition(0, 0, 0);
-    entity->increaseRotation(1, 1, 1);
+//    Camera *camera = robotSimWidget->getCamera();
 
-    camera->increasePostion(0, 0, 0);
+//    camera->setPosition(glm::vec3(x, 450, z));
+//    camera->setRotation(vec3(40, -deg, 0));
 
     robotSimWidget->update();
+    robotSimWidget->setRenderCount(robotSimWidget->getRenderCount() + 1);
 }

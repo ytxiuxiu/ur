@@ -4,17 +4,22 @@
 #include <vector>
 #include <QtWidgets>
 
+using namespace std;
+
 
 class RawModel
 {
 public:
-    RawModel(GLuint vaoId, GLuint vertexCount);
+    RawModel(GLuint vaoId, vector<GLuint> shapeSizes) {
+        this->vaoId = vaoId;
+        this->shapeSizes = shapeSizes;
+    }
     GLuint getVaoId() { return vaoId; }
-    GLuint getVertexCount() { return vertexCount; }
+    vector<GLuint> getShapeSizes() { return shapeSizes; }
 
 private:
     GLuint vaoId;
-    GLuint vertexCount;
+    vector<GLuint> shapeSizes;
 };
 
 #endif // RAWMODEL_H

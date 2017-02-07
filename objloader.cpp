@@ -5,19 +5,22 @@
 
 RawModel* ObjLoader::loadObjModel(string fileContent, Loader *loader)
 {
-    tinyobj::attrib_t attrib;
-    std::vector<tinyobj::shape_t> shapes;
-    std::vector<tinyobj::material_t> materials;
-    std::string err;
+    vector<GLuint> shapeSizes;
 
-    std::istringstream inBaseFile(fileContent.c_str());
+    tinyobj::attrib_t attrib;
+    vector<tinyobj::shape_t> shapes;
+    vector<tinyobj::material_t> materials;
+    string err;
+
+    istringstream inBaseFile(fileContent.c_str());
     tinyobj::LoadObj(&attrib, &shapes, &materials, &err, &inBaseFile);
 
-    std::vector<GLuint> vertexIndices;
-    std::vector<GLuint> normalIndices;
+    vector<GLuint> vertexIndices;
+    vector<GLuint> normalIndices;
 
     for (unsigned long j = 0; j < shapes.size(); j++)
     {
+        shapeSizes.push_back(shapes[j].mesh.indices.size());
         for (unsigned long i = 0; i < shapes[j].mesh.indices.size(); i++)
         {
             vertexIndices.push_back((GLuint) shapes[j].mesh.indices[i].vertex_index);
@@ -25,8 +28,8 @@ RawModel* ObjLoader::loadObjModel(string fileContent, Loader *loader)
         }
     }
 
-    std::vector<GLfloat> vertices(vertexIndices.size() * 3);
-    std::vector<GLfloat> normals(vertexIndices.size() * 3);
+    vector<GLfloat> vertices(vertexIndices.size() * 3);
+    vector<GLfloat> normals(vertexIndices.size() * 3);
 
     for (unsigned long i = 0; i < vertexIndices.size(); i++)
     {
@@ -41,5 +44,5 @@ RawModel* ObjLoader::loadObjModel(string fileContent, Loader *loader)
         normals[i * 3 + 2] = attrib.normals[normalPosition * 3 + 2];
     }
 
-    return loader->loadToVao(&vertices, &normals, &vertexIndices);
+    return loader->loadToVao(&vertices, &normals, &vertexIndices, shapeSizes);
 }

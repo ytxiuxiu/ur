@@ -7,12 +7,15 @@
 
 #include "rawmodel.h"
 
+using namespace std;
+
 
 class Loader
 {
 public:
     Loader();
-    RawModel* loadToVao(std::vector<GLfloat> *vertices, std::vector<GLfloat> *normals, std::vector<GLuint> *indices);
+    RawModel* loadToVao(vector<GLfloat> *vertices, vector<GLfloat> *normals,
+                        vector<GLuint> *indices, vector<GLuint> shapeSizes);
     void cleanUp();
 
 private:
