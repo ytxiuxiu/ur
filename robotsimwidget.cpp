@@ -9,18 +9,6 @@ RobotSimWidget::RobotSimWidget(QWidget* parent) :
     QOpenGLWidget(parent)
 {
     renderCount = 0;
-
-    mat4 m1 = {1, 0, 0, 0,
-            0, 0, -1, 0,
-            0, 1, 0, 152,
-            0, 0, 0, 1};
-    mat4 m2 = {0, 1, 0, 0,
-               -1, 0, 0, 244,
-               0, 0, 1, -120,
-               0, 0, 0, 1};
-    mat4 r = m1 * m2;
-    qDebug() << "test";
-    Maths::print(r);
 }
 
 RobotSimWidget::~RobotSimWidget()
@@ -47,16 +35,22 @@ RobotSimWidget::~RobotSimWidget()
 void RobotSimWidget::initializeGL()
 {
     light = new Light(vec3(5000, 0, 5000), vec3(1, 1, 1));
-    camera = new Camera(vec3(50, 450, 500), vec3(20, 0, 0));
+    camera = new Camera(vec3(50, 650, 800), vec3(20, 0, 0));
 
     kinematicChain = new KinematicChain();
 
     loader = new Loader();
     Entity* robot2 = new Entity(ObjLoader::loadObjModel(File::readFile(":/models/robot-2.obj"), loader));
     Entity* robot3 = new Entity(ObjLoader::loadObjModel(File::readFile(":/models/robot-3.obj"), loader));
+    Entity* robot4 = new Entity(ObjLoader::loadObjModel(File::readFile(":/models/robot-4.obj"), loader));
+    Entity* robot5 = new Entity(ObjLoader::loadObjModel(File::readFile(":/models/robot-5.obj"), loader));
+    Entity* robot6 = new Entity(ObjLoader::loadObjModel(File::readFile(":/models/robot-6.obj"), loader));
 
-    kinematicChain->addLink(new KinematicLink(robot2, 0, 152, 0, 90, -90));
-    kinematicChain->addLink(new KinematicLink(robot3, -90, -120, -244, 0, 0));
+    kinematicChain->addLink(new KinematicLink(robot2, 0, 152, 0, 90));
+    kinematicChain->addLink(new KinematicLink(robot3, -90, -120, -244, 0));
+    kinematicChain->addLink(new KinematicLink(robot4, 0, 93, -213, 0));
+    kinematicChain->addLink(new KinematicLink(robot5, -90, -83, 0, 90));
+    kinematicChain->addLink(new KinematicLink(robot6, 0, 82, 0, 0));
     kinematicChain->update();
 
     shader = new StaticShader();

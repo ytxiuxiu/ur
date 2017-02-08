@@ -46,10 +46,6 @@ private:
     QString float2DegStr(float value);
     bool inited;
 
-    mat4 t1;
-    mat4 t2;
-    mat4 t3;
-
 };
 
 #endif // MAINWIDGET_H

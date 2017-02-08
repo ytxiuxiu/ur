@@ -6,17 +6,18 @@
 
 #include "entity.h"
 
+using namespace std;
+
 
 class KinematicLink
 {
 public:
-    KinematicLink(Entity* entity, float theta, float d, float a, float alpha, float rotate) {
+    KinematicLink(Entity* entity, float theta, float d, float a, float alpha) {
         this->entity = entity;
         this->theta = theta;
         this->d = d;
         this->a = a;
         this->alpha = alpha;
-        this->rotate = rotate;
     }
     Entity* getEntity() { return entity; }
     void setEntity(Entity* entity) { this->entity = entity; }
@@ -29,13 +30,14 @@ public:
     float getAlpha() { return alpha; }
     void setAlpha(float alpha) { this->alpha = alpha; }
     mat4 getMatrix() {
-        return mat4(std::cos(radians(theta)), -std::sin(radians(theta)) * std::cos(radians(alpha)), std::sin(radians(theta)) * std::sin(radians(alpha)), a * std::cos(radians(theta)),
-                    std::sin(radians(theta)), std::cos(radians(theta)) * std::cos(radians(alpha)), -std::cos(radians(theta)) * std::sin(radians(alpha)), a * std::sin(radians(theta)),
-                    0, std::sin(radians(alpha)), std::cos(radians(alpha)), d,
-                    0, 0, 0, 1);
+        float theta = radians(this->theta);
+        float alpha = radians(this->alpha);
+        qDebug() << theta << alpha;
+        return mat4(cos(theta), sin(theta), 0, 0,
+                    -sin(theta) * cos(alpha), cos(theta) * cos(alpha), sin(alpha), 0,
+                    sin(theta) * sin(alpha), -cos(theta) * sin(alpha), cos(alpha), 0,
+                    a * cos(theta), a * sin(theta), d, 1);
     }
-    float getRotate() { return rotate; }
-    void setRotate(float rotate) { this->rotate = rotate; }
 
 private:
     Entity* entity;
@@ -43,7 +45,6 @@ private:
     float d;
     float a;
     float alpha;
-    float rotate;
 };
 
 #endif // KINEMATICLINK_H

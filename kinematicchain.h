@@ -33,18 +33,15 @@ public:
 
         for (unsigned long i = 0; i < links.size(); i++)
         {
-            qDebug() << "A" << i;
-            qDebug() << links[i]->getTheta() << links[i]->getD() << links[i]->getA() << links[i]->getAlpha();
-            Maths::print(links[i]->getMatrix());
-//            mat4 one = rotate(mat4(1), radians(links[i]->getRotate()), vec3(0, 0, 1));
-            mat4 one = mat4(1);
-            for (unsigned long j = 0; j <= i; j++)
+            mat4 one = links[0]->getMatrix();
+            for (unsigned long j = 1; j <= i; j++)
             {
-                one = one * links[j]->getMatrix();
+                qDebug() << "x";
+                Maths::print(links[j]->getMatrix());
+                one *= links[j]->getMatrix();
             }
-            qDebug() << "to render";
+            qDebug() << "m" << i;
             Maths::print(one);
-            qDebug() << "";
             matrics.push_back(one);
         }
     }
@@ -55,7 +52,7 @@ public:
         for (unsigned long i = 0; i < matrics.size(); i++)
         {
             mat4 matrix = matrics[i];
-            positions.push_back(vec3(matrix[1][3], matrix[2][3], matrix[0][3]));
+            positions.push_back(vec3(matrix[3][1], matrix[3][2], matrix[3][0]));
         }
         return positions;
     }
@@ -64,21 +61,26 @@ public:
 
         for (unsigned long i = 0; i < matrics.size(); i++)
         {
+
             mat4 matrix = matrics[i];
+            if (i < matrics.size() - 1)
+            {
+                matrix *= rotate(mat4(1), radians(links[i + 1]->getTheta()), vec3(0, 0, 1));
+            }
 
             float yaw, pitch, roll;
 
             if (matrix[0][0] == 1.0f || matrix[0][0] == -1.0f)
             {
-                yaw = std::atan2f(matrix[0][2], matrix[2][3]);
+                yaw = std::atan2f(matrix[2][0], matrix[3][2]);
                 pitch = 0;
             }
             else
             {
-                yaw = std::atan2(-matrix[2][0], matrix[0][0]);
-                pitch = std::asin(matrix[1][0]);
+                yaw = std::atan2(-matrix[0][2], matrix[0][0]);
+                pitch = std::asin(matrix[0][1]);
             }
-            roll = std::atan2(-matrix[1][2], matrix[1][1]);
+            roll = std::atan2(-matrix[2][1], matrix[1][1]);
 
             rotations.push_back(vec3(Maths::degree(yaw), Maths::degree(pitch), Maths::degree(roll)));
         }

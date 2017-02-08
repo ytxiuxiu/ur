@@ -13,7 +13,7 @@
 #define SCENE_HEIGHT 291.0f
 #define FOV 70.0f
 #define NEAR_PLANE 0.1f
-#define FAR_PLANE 1000.0f
+#define FAR_PLANE 100000.0f
 
 using namespace glm;
 
