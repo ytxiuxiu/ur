@@ -48,7 +48,7 @@ public:
         this->rotation.z += z;
     }
     RawModel *getModel() { return model; }
-    vec3 getPoistion() { return position; }
+    vec3 getPosition() { return position; }
     void setPosition(vec3 position) { this->position = position; }
     vec3 getRotation() { return rotation; }
     void setRotation(vec3 rotation) { this->rotation = rotation; }

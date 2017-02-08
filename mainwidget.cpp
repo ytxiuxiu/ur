@@ -85,19 +85,27 @@ QString MainWidget::float2DegStr(float value)
 void MainWidget::changeLabelTargetBase(int base)
 {
     ui->labelTargetBase->setText(float2DegStr(base));
+
+    KinematicChain* chain = robotSimWidget->getKinematicChain();
+    chain->getLinks()[0]->setTheta(base);
+    chain->update();
     Entity *robot1 = robotSimWidget->getEntities()->at("robot-0-1");
     robot1->setRotation(vec3(robot1->getRotation().x, base, robot1->getRotation().z));
 
-    t1 = Maths::createDhTransformation(152, base, 0, 90);
-    vec3 p1 = Maths::getPosition(t1);
-    vec3 r1 = Maths::getRotation(t1);
+    Entity *robot2 = chain->getLinks()[1]->getEntity();
+    vec3 p = robot2->getPosition();
+    qDebug() << p.x << p.y << p.z;
 
-    Entity *robot2 = robotSimWidget->getEntities()->at("robot-0-2");
-    robot2->setPosition(p1);
-    robot2->setRotation(r1);
-    Entity *xyz1 = robotSimWidget->getEntities()->at("robot-0-xyz-1");
-    xyz1->setPosition(p1);
-    xyz1->setRotation(r1);
+//    t1 = Maths::createDhTransformation(152, base, 0, 90);
+//    vec3 p1 = Maths::getPosition(t1);
+//    vec3 r1 = Maths::getRotation(t1);
+
+//    Entity *robot2 = robotSimWidget->getEntities()->at("robot-0-2");
+//    robot2->setPosition(p1);
+//    robot2->setRotation(r1);
+//    Entity *xyz1 = robotSimWidget->getEntities()->at("robot-0-xyz-1");
+//    xyz1->setPosition(p1);
+//    xyz1->setRotation(r1);
 
 }
 
@@ -105,21 +113,26 @@ void MainWidget::changeLabelTargetShoulder(int shoulder)
 {
     ui->labelTargetShoulder->setText(float2DegStr(shoulder));
 
-    mat4 r1r = rotate(mat4(1), radians(1.0f * shoulder), vec3(0, 0, 1)) * t1;
-    vec3 rotation = Maths::getRotation(r1r);
-    Entity *robot2 = robotSimWidget->getEntities()->at("robot-0-2");
-    robot2->setRotation(rotation);
+    KinematicChain* chain = robotSimWidget->getKinematicChain();
+    chain->getLinks()[0]->setRotate(shoulder);
+    chain->update();
 
-    t2 = Maths::createDhTransformation(-120, shoulder, -244, 0) * t1;
-    vec3 p2 = Maths::getPosition(t2);
-    vec3 r2 = Maths::getRotation(t2);
 
-    Entity *robot3 = robotSimWidget->getEntities()->at("robot-0-3");
-    robot3->setPosition(p2);
-    robot3->setRotation(r2);
-    Entity *xyz2 = robotSimWidget->getEntities()->at("robot-0-xyz-2");
-    xyz2->setPosition(p2);
-    xyz2->setRotation(r2);
+//    mat4 r1r = rotate(mat4(1), radians(1.0f * shoulder), vec3(0, 0, 1)) * t1;
+//    vec3 rotation = Maths::getRotation(r1r);
+//    Entity *robot2 = robotSimWidget->getEntities()->at("robot-0-2");
+//    robot2->setRotation(rotation);
+
+//    t2 = Maths::createDhTransformation(-120, shoulder, -244, 0) * t1;
+//    vec3 p2 = Maths::getPosition(t2);
+//    vec3 r2 = Maths::getRotation(t2);
+
+//    Entity *robot3 = robotSimWidget->getEntities()->at("robot-0-3");
+//    robot3->setPosition(p2);
+//    robot3->setRotation(r2);
+//    Entity *xyz2 = robotSimWidget->getEntities()->at("robot-0-xyz-2");
+//    xyz2->setPosition(p2);
+//    xyz2->setRotation(r2);
 
 
 }
@@ -128,10 +141,10 @@ void MainWidget::changeLabelTargetElbow(int elbow)
 {
     ui->labelTargetElbow->setText(float2DegStr(elbow));
 
-    mat4 r2r = rotate(mat4(1), radians(1.0f * elbow), vec3(0, 0, 1)) * t1;
-    vec3 rotation = Maths::getRotation(r2r);
-    Entity *robot3 = robotSimWidget->getEntities()->at("robot-0-3");
-    robot3->setRotation(rotation);
+//    mat4 r2r = rotate(mat4(1), radians(1.0f * elbow), vec3(0, 0, 1)) * t1;
+//    vec3 rotation = Maths::getRotation(r2r);
+//    Entity *robot3 = robotSimWidget->getEntities()->at("robot-0-3");
+//    robot3->setRotation(rotation);
 }
 
 void MainWidget::changeLabelTargetWrist1(int wrist1)

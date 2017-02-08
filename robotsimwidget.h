@@ -12,6 +12,7 @@
 #include "file.h"
 #include "light.h"
 #include "objloader.h"
+#include "kinematicchain.h"
 
 #define FPS 30
 
@@ -22,6 +23,7 @@ public:
     RobotSimWidget(QWidget* parent = 0);
     ~RobotSimWidget();
     std::map<std::string, Entity*> *getEntities() { return &entities; }
+    KinematicChain* getKinematicChain() { return kinematicChain; }
     Camera *getCamera() { return camera; }
     int getRenderCount() { return renderCount; }
     void setRenderCount(int renderCount) { this->renderCount = renderCount; }
@@ -48,6 +50,7 @@ private:
     Light *light;
     ObjLoader *objLoader;
     long renderCount;
+    KinematicChain *kinematicChain;
 
 };
 

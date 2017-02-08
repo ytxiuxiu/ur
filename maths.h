@@ -24,6 +24,13 @@ public:
     static mat4 getRotationMatric(vec4 quaternion);
     static mat3 getRotationMatric(mat4 dhTransformation);
     static float degree(float radians) { return radians * 180 / M_PI; }
+    static void print(mat4 matrix) {
+        qDebug() << round(matrix[0][0]) << round(matrix[0][1]) << round(matrix[0][2]) << round(matrix[0][3]);
+        qDebug() << round(matrix[1][0]) << round(matrix[1][1]) << round(matrix[1][2]) << round(matrix[1][3]);
+        qDebug() << round(matrix[2][0]) << round(matrix[2][1]) << round(matrix[2][2]) << round(matrix[2][3]);
+        qDebug() << round(matrix[3][0]) << round(matrix[3][1]) << round(matrix[3][2]) << round(matrix[3][3]);
+        qDebug() << "";
+    }
 };
 
 #endif // MATHS_H

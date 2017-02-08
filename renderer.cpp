@@ -25,7 +25,7 @@ void Renderer::render(Entity *entity)
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
 
-    mat4 transformation = Maths::createTransformation(entity->getPoistion(), entity->getRotation(), entity->getScale());
+    mat4 transformation = Maths::createTransformation(entity->getPosition(), entity->getRotation(), entity->getScale());
     shader->loadTransformation(transformation);
     shader->loadIsLight(entity->getIsLight());
 

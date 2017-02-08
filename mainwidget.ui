@@ -190,7 +190,7 @@
      <number>360</number>
     </property>
     <property name="value">
-     <number>0</number>
+     <number>-90</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
