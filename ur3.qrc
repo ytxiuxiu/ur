@@ -14,5 +14,6 @@
         <file>robot-base.obj</file>
         <file>robot-2.obj</file>
         <file>xyz.obj</file>
+        <file>robot-3.obj</file>
     </qresource>
 </RCC>

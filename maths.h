@@ -20,10 +20,10 @@ public:
     static mat4 createDhTransformation(float d, float theta, float a, float alpha);
     static vec3 getPosition(mat4 dhTransformation);
     static vec3 getRotation(mat4 dhTransformation);
+    static vec4 getQuaternion(mat4 dhTransformation);
+    static mat4 getRotationMatric(vec4 quaternion);
     static mat3 getRotationMatric(mat4 dhTransformation);
     static float degree(float radians) { return radians * 180 / M_PI; }
-//    static vec4 quaternion(vec3 rotation);
-//    static vec3 rotation(vec4 quaternion);
 };
 
 #endif // MATHS_H

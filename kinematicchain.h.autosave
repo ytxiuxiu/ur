@@ -1,0 +1,18 @@
+#ifndef KINEMATICCHAIN_H
+#define KINEMATICCHAIN_H
+
+#include <vector>
+
+using namespace std;
+
+
+class KinematicChain
+{
+public:
+    KinematicChain();
+
+private:
+    vector<
+};
+
+#endif // KINEMATICCHAIN_H

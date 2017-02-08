@@ -42,7 +42,9 @@ SOURCES += main.cpp\
     rawmodel.cpp \
     entity.cpp \
     light.cpp \
-    camera.cpp
+    camera.cpp \
+    kinematicchain.cpp \
+    kinematiclink.cpp
 
 HEADERS  += mainwidget.h \
     robotsimwidget.h \
@@ -59,7 +61,9 @@ HEADERS  += mainwidget.h \
     camera.h \
     file.h \
     light.h \
-    objloader.h
+    objloader.h \
+    kinematicchain.h \
+    kinematiclink.h
 
 FORMS    += mainwidget.ui
 
